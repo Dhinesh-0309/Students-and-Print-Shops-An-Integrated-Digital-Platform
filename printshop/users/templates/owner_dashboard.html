@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Owner Dashboard</title>
+    <style>
+        /* Styles remain the same */
+    </style>
+</head>
+<body>
+    <h1>Files Uploaded for Your Shop</h1>
+    <ul>
+        {% for request in print_requests %}
+            <li>
+                <strong>{{ request.student.username }}</strong> uploaded a file:
+                <a href="{{ request.file.url }}">Download File</a>
+                <p>Pages: {{ request.pages }} | Print Configuration: {{ request.print_config }}</p>
+            </li>
+        {% empty %}
+            <li>No files uploaded yet.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

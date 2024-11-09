@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Sign-Up</title>
+    <style>
+        body {
+            background-image: url('https://images.unsplash.com/photo-1600694730511-c237f5c5e4d9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMTc3M3wwfDF8c2VhcmNofDJ8fHN0dWRlbnQlMjBzdW5zaGFyZXxlbnwwfHx8fDE2ODkyMzI1NzE&ixlib=rb-1.2.1&q=80&w=1080'); /* Background image */
+            background-size: cover;
+            background-position: center;
+            font-family: Arial, sans-serif;
+            color: #fff; /* Text color */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            animation: fadeIn 1s ease-in-out; /* Animation on load */
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Shadow for the heading */
+        }
+
+        form {
+            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background for the form */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            animation: slideIn 0.5s ease-in-out; /* Animation for the form */
+            width: 90%; /* Responsive width */
+            max-width: 400px; /* Max width for form */
+        }
+
+        button {
+            background-color: #ffdd57; /* Button color */
+            color: #000; /* Text color for the button */
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #ffbb00; /* Darker button color on hover */
+        }
+
+        a {
+            text-decoration: none; /* Remove underline */
+            color: #ffdd57; /* Link color */
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h2>Student Registration</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Sign Up</button>
+    </form>
+    <p>Already have an account? <a href="{% url 'login' %}">Login here</a></p>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!-- payment_estimation.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cost Estimation</title>
+</head>
+<body>
+    <h1>Cost Estimation</h1>
+    <p>Shop: {{ print_request.shop.shop_name }}</p>
+    <p>Pages: {{ print_request.pages }}</p>
+    <p>Copies: {{ print_request.copies }}</p>
+    <p>Cost per Page: ${{ print_request.shop.cost_per_page }}</p>
+    <h2>Total Cost: ${{ total_cost }}</h2>
+
+    <a href="{% url 'payment_page' %}">Proceed to Payment</a>
+</body>
+</html>

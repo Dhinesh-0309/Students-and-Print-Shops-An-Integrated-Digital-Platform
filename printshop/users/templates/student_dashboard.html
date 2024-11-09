@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <style>
+        body {
+            background-image: url('https://images.unsplash.com/photo-1581502102108-65b28edfa449?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMTc3M3wwfDF8c2VhcmNofDF8fHBhcGVyJTIwZmF0ZXxlbnwwfHx8fDE2ODkyMjExMjI&ixlib=rb-1.2.1&q=80&w=1080'); /* Background image */
+            background-size: cover;
+            background-position: center;
+            font-family: Arial, sans-serif;
+            color: #fff; /* Text color */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            animation: fadeIn 1s ease-in-out; /* Animation on load */
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Shadow for the heading */
+        }
+
+        ul {
+            list-style-type: none; /* Remove default list styles */
+            padding: 0; /* Remove padding */
+            width: 100%; /* Full width */
+            max-width: 600px; /* Limit width */
+        }
+
+        li {
+            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background for the list item */
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            animation: slideIn 0.5s ease-in-out; /* Animation for each list item */
+        }
+
+        button {
+            background-color: #ffdd57; /* Button color */
+            color: #000; /* Text color for the button */
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #ffbb00; /* Darker button color on hover */
+        }
+
+        a {
+            text-decoration: none; /* Remove underline */
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Available Print Shops</h1>
+    <ul>
+        {% for shop in shops %}
+            <li>
+                <h3>{{ shop.shop_name }}</h3>
+                <p>Rating: {{ shop.rating }} - Open: {{ shop.opening_time }} - Close: {{ shop.closing_time }} - Landmark: {{ shop.landmark }}</p>
+                <a href="{% url 'upload_file' shop.id %}">
+                    <button>Upload File to {{ shop.shop_name }}</button>
+                </a>
+            </li>
+        {% empty %}
+            <li>No shops available.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
