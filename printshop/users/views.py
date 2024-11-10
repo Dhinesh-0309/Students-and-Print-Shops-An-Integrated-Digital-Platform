@@ -5,18 +5,35 @@ from django.contrib.auth.decorators import login_required
 from .forms import StudentRegistrationForm, OwnerRegistrationForm, UserRegistrationForm, FileUploadForm
 from .models import OwnerProfile, PrintRequest
 from PyPDF2 import PdfReader 
+from django.contrib import messages
 
 def student_signup(request):
     if request.method == 'POST':
         form = StudentRegistrationForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
-            user.set_password(form.cleaned_data['password'])
-            user.save()
-            return redirect('login')
+            user.set_password(form.cleaned_data['password'])  # Set the password after cleaning
+            user.save()  # Save the user to the database
+            
+            print(f"User created: {user.username}")  # Debugging line
+            
+            # Optionally authenticate and log in the user immediately after signup
+            user = authenticate(request, username=user.username, password=form.cleaned_data['password'])
+            if user is not None:
+                login(request, user)  # Log the user in immediately after signup
+                print("User logged in")  # Debugging line
+                
+            return redirect('login')  # After saving, redirect to the login page
+        else:
+            print("Form is not valid")  # If the form is not valid, print an error
+            
     else:
         form = StudentRegistrationForm()
+    
     return render(request, 'student_signup.html', {'form': form})
+
+
+
 
 def owner_signup(request):
     if request.method == 'POST':
@@ -45,12 +62,17 @@ def user_login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
+
         user = authenticate(request, username=username, password=password)
+
         if user is not None:
             login(request, user)
+            # Redirect based on whether it's an owner or student
             return redirect('owner_dashboard' if hasattr(user, 'ownerprofile') else 'student_dashboard')
         else:
-            return render(request, 'login.html', {'error': 'Invalid credentials'})
+            messages.error(request, 'Invalid credentials')  # Better error handling using messages framework
+            return render(request, 'login.html')  # Passing error message to the template
+
     return render(request, 'login.html')
 
 @login_required
