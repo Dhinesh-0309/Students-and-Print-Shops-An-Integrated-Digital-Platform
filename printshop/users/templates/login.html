@@ -6,97 +6,96 @@
     <title>Login</title>
     <style>
         body {
-            background-image: url('/Users/dp/Documents/CSP/printshop/users/static/kalasalingam_University.jpg);
+            /* Online background related to print industry */
+            background-image: url('https://images.unsplash.com/photo-1592194996308-7b43878e84a6'); /* A print-related background */
             background-size: cover;
             background-position: center;
-            font-family: Arial, sans-serif;
-            color: #fff; /* Text color */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Professional font */
+            color: #fff;
             display: flex;
             flex-direction: column;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             height: 100vh;
             margin: 0;
-            animation: fadeIn 1s ease-in-out; /* Animation on load */
+            background-attachment: fixed; /* Keeps the background fixed while scrolling */
         }
 
         h2 {
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Shadow for the heading */
+            margin-bottom: 30px;
+            font-size: 2rem;
+            text-transform: uppercase;
+            font-weight: 600;
+            text-align: center;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7); /* Text shadow for better readability */
         }
 
         form {
-            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background for the form */
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-            animation: slideIn 0.5s ease-in-out; /* Animation for the form */
+            background-color: rgba(0, 0, 0, 0.7); /* Dark, semi-transparent background for the form */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6); /* Subtle shadow */
+            width: 100%;
+            max-width: 400px; /* Restrict form width for a clean, centered look */
         }
 
         label {
             display: block;
-            margin: 10px 0 5px;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+            font-weight: 500;
         }
 
         input {
             width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: none;
-            border-radius: 5px;
-            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #ecf0f1;
+            color: #2c3e50;
+            font-size: 1rem;
         }
 
         button {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             border: none;
-            border-radius: 5px;
-            background-color: #007bff; /* Bootstrap primary color */
+            border-radius: 8px;
+            background-color: #2980b9; /* A professional, modern blue */
             color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s ease;
         }
 
         button:hover {
-            background-color: #0056b3; /* Darker shade on hover */
+            background-color: #3498db; /* Slightly lighter blue on hover */
         }
 
         p {
-            margin-top: 10px;
+            margin-top: 15px;
             text-align: center;
-            color: #ddd; /* Light text for links */
+            color: #bdc3c7; /* Lighter text for footer */
         }
 
         a {
-            color: #fff; /* Link color */
-            text-decoration: underline;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0 5px;
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        @keyframes slideIn {
-            from {
-                transform: translateY(-20px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
+        a:hover {
+            color: #ecf0f1; /* Slightly lighter text color on hover */
         }
     </style>
 </head>
 
 <body>
-    <h2>Login</h2>
+    <h2>Login to Your Account</h2>
     {% if error %}
         <p style="color: red;">{{ error }}</p>
     {% endif %}
@@ -104,10 +103,10 @@
         {% csrf_token %}
         <label for="username">Username:</label>
         <input type="text" name="username" required>
-        <br>
+        
         <label for="password">Password:</label>
         <input type="password" name="password" required>
-        <br>
+        
         <button type="submit">Login</button>
     </form>
     <p>Don't have an account? <a href="{% url 'student_signup' %}">Register as a Student</a> | <a href="{% url 'owner_signup' %}">Register as an Owner</a></p>

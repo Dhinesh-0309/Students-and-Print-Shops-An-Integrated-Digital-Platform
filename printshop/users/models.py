@@ -8,7 +8,7 @@ class OwnerProfile(models.Model):
     opening_time = models.TimeField(default=datetime.time(9, 0))  # Set as a time object
     closing_time = models.TimeField(default=datetime.time(18, 0))  # Set as a time object
     landmark = models.CharField(max_length=255, default='Unknown Landmark')
-    rating = models.FloatField(default=0.0)
+    
     
 
     def __str__(self):

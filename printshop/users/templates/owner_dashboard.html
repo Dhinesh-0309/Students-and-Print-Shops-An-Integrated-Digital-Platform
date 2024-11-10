@@ -5,12 +5,97 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Owner Dashboard</title>
     <style>
-        /* Styles remain the same */
+        /* Global Styles for Consistency */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Consistent font across the site */
+            background-color: #f4f7f6; /* Light background color for the entire page */
+            color: #333; /* Dark text color for readability */
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            line-height: 1.6;
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #2980b9; /* Consistent blue theme for headings */
+            font-weight: bold;
+        }
+
+        h1 {
+            margin-top: 20px;
+            font-size: 2.5rem;
+        }
+
+        h2 {
+            margin-top: 10px;
+            font-size: 1.8rem;
+        }
+
+        ul {
+            list-style-type: none; /* Remove bullet points */
+            padding: 0;
+        }
+
+        li {
+            background-color: #fff; /* White background for list items */
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for the list items */
+        }
+
+        li a {
+            color: #2980b9; /* Blue link color */
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        li a:hover {
+            text-decoration: underline; /* Underline effect on hover */
+        }
+
+        p {
+            font-size: 1rem;
+            color: #555; /* Slightly lighter color for regular text */
+        }
+
+        a {
+            color: #2980b9;
+            text-decoration: none;
+            padding: 10px;
+            display: inline-block;
+            margin-top: 20px;
+            font-weight: bold;
+            border-radius: 5px;
+            background-color: #ecf0f1; /* Light gray background for the button */
+            transition: background-color 0.3s;
+        }
+
+        a:hover {
+            background-color: #d5dbdb; /* Darker gray on hover */
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            li {
+                padding: 12px;
+            }
+        }
     </style>
 </head>
 <body>
     <h1>Welcome, {{ owner.shop_name }}!</h1>
     <h2>Print Requests</h2>
+    <a href="{% url 'owner_settings' %}">Configure Print Cost</a>
     <ul>
         {% for request in print_requests %}
             <li>
@@ -23,12 +108,7 @@
         {% endfor %}
     </ul>
 
+    <!-- Link to configure print cost -->
     
-<!-- Link to configure print cost -->
-<a href="{% url 'owner_settings' %}">Configure Print Cost</a>
-
-
-    
-
 </body>
 </html>

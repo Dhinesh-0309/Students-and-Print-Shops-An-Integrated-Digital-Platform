@@ -6,40 +6,48 @@
     <title>Owner Signup</title>
     <style>
         body {
-            background-image: url('https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMTc3M3wwfDF8c2VhcmNofDh8fGZhdGUlMjBsaWZ8ZW58MHx8fHwxNjg5MjAxOTIw&ixlib=rb-1.2.1&q=80&w=1080'); /* Background image */
+            /* Background related to print industry */
+            background-image: url('https://images.unsplash.com/photo-1592194996308-7b43878e84a6'); /* Print-related background */
             background-size: cover;
             background-position: center;
-            font-family: Arial, sans-serif;
-            color: #fff; /* Text color */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #fff;
             display: flex;
             flex-direction: column;
-            align-items: center;
             justify-content: center;
-            min-height: 100vh;
+            align-items: center;
+            height: 100vh;
             margin: 0;
-            animation: fadeIn 1s ease-in-out; /* Animation on load */
+            background-attachment: fixed; /* Keeps the background fixed while scrolling */
+            animation: fadeIn 1s ease-in-out; /* Fade-in effect on load */
         }
 
         h2 {
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Shadow for the heading */
+            margin-bottom: 30px;
+            font-size: 2rem;
+            text-transform: uppercase;
+            font-weight: 600;
+            text-align: center;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7); /* Text shadow for better readability */
         }
 
         form {
-            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background for the form */
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-            animation: slideIn 0.5s ease-in-out; /* Animation for the form */
-            width: 300px; /* Limit width of the form */
+            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6); /* Subtle shadow */
+            width: 100%;
+            max-width: 400px; /* Form width limit */
+            animation: slideIn 0.5s ease-in-out; /* Slide-in effect for the form */
         }
 
         button {
-            background-color: #ffdd57; /* Button color */
+            background-color:#2980b9; /* Button color */
             color: #000; /* Text color for the button */
             border: none;
-            padding: 10px;
-            border-radius: 5px;
+            padding: 12px;
+            border-radius: 8px;
             cursor: pointer;
             transition: background-color 0.3s;
             width: 100%; /* Full width */
@@ -50,7 +58,7 @@
         }
 
         a {
-            color: #ffdd57; /* Link color */
+            color: #2980b9; /* Link color */
             text-decoration: underline;
             transition: color 0.3s;
         }
@@ -76,6 +84,24 @@
             to {
                 transform: translateY(0);
                 opacity: 1;
+            }
+        }
+
+        p {
+            margin-top: 15px;
+            text-align: center;
+            color: #bdc3c7; /* Lighter text for footer */
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            form {
+                padding: 20px;
+                width: 80%;
             }
         }
     </style>

@@ -24,7 +24,7 @@ class StudentRegistrationForm(forms.ModelForm):
 class OwnerRegistrationForm(forms.ModelForm):
     class Meta:
         model = OwnerProfile
-        fields = ['shop_name', 'opening_time', 'closing_time', 'landmark', 'rating']
+        fields = ['shop_name', 'opening_time', 'closing_time', 'landmark' ]
 
 class UserRegistrationForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)

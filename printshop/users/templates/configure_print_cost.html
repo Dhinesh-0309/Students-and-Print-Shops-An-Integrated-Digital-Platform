@@ -1,7 +1,102 @@
-<h2>Configure Print Cost</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Owner Settings</title>
+    <style>
+        /* Global Styles for Consistency */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Consistent font across the site */
+            background-color: #f4f7f6; /* Light background color for the entire page */
+            color: #333; /* Dark text color for readability */
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            line-height: 1.6;
+        }
 
-<form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Save Settings</button>
-</form>
+        h1 {
+            text-align: center;
+            color: #2980b9; /* Consistent blue theme for headings */
+            font-weight: bold;
+            margin-top: 30px;
+            font-size: 2.5rem;
+        }
+
+        form {
+            background-color: #fff; /* White background for the form */
+            padding: 20px;
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for the form */
+            width: 90%; /* Responsive width */
+            max-width: 500px; /* Max width for form */
+            margin: 0 auto; /* Center the form */
+            animation: slideIn 0.5s ease-in-out; /* Animation for the form */
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #555; /* Light color for labels */
+            font-weight: bold;
+        }
+
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: 1px solid #ddd; /* Light border */
+        }
+
+        button {
+            background-color: #ffdd57; /* Button color */
+            color: #000; /* Text color for the button */
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%; /* Make button full width */
+        }
+
+        button:hover {
+            background-color: #ffbb00; /* Darker button color on hover */
+        }
+
+        /* Keyframe Animations */
+        @keyframes slideIn {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            form {
+                width: 90%;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Configure Print Costs</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save Settings</button>
+    </form>
+</body>
+</html>

@@ -5,40 +5,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Dashboard</title>
     <style>
+        /* Global Styles for Consistency */
         body {
-            background-image: url('https://images.unsplash.com/photo-1581502102108-65b28edfa449?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMTc3M3wwfDF8c2VhcmNofDF8fHBhcGVyJTIwZmF0ZXxlbnwwfHx8fDE2ODkyMjExMjI&ixlib=rb-1.2.1&q=80&w=1080'); /* Background image */
-            background-size: cover;
-            background-position: center;
-            font-family: Arial, sans-serif;
-            color: #fff; /* Text color */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Consistent font across the site */
+            background-color: #f4f7f6; /* Light background color for the entire page */
+            color: #333; /* Dark text color for readability */
             margin: 0;
-            animation: fadeIn 1s ease-in-out; /* Animation on load */
+            padding: 0;
+            box-sizing: border-box;
+            line-height: 1.6;
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #2980b9; /* Consistent blue theme for headings */
+            font-weight: bold;
         }
 
         h1 {
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Shadow for the heading */
+            margin-top: 20px;
+            font-size: 2.5rem;
+        }
+
+        h2 {
+            margin-top: 10px;
+            font-size: 1.8rem;
         }
 
         ul {
-            list-style-type: none; /* Remove default list styles */
-            padding: 0; /* Remove padding */
-            width: 100%; /* Full width */
+            list-style-type: none; /* Remove bullet points */
+            padding: 0;
+            width: 100%;
             max-width: 600px; /* Limit width */
+            margin: 0 auto; /* Center the list */
         }
 
         li {
-            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background for the list item */
+            background-color: #fff; /* White background for list items */
             margin: 10px 0;
             padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for the list items */
             animation: slideIn 0.5s ease-in-out; /* Animation for each list item */
+        }
+
+        li h3 {
+            color: #2980b9; /* Heading color for shop names */
+            margin-bottom: 10px;
+        }
+
+        li p {
+            font-size: 1rem;
+            color: #555; /* Slightly lighter color for regular text */
         }
 
         button {
@@ -76,6 +94,21 @@
             to {
                 transform: translateY(0);
                 opacity: 1;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            li {
+                padding: 12px;
             }
         }
     </style>

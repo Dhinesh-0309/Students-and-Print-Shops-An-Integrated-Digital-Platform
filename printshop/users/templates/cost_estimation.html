@@ -1,34 +1,120 @@
-<h2>Cost Estimation</h2>
-<p>Print Shop: {{ shop.shop_name }}</p>
-<p>Number of Pages: {{ page_count }}</p>
-<p>Total Cost: ${{ total_cost }}</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cost Estimation</title>
+    <style>
+        /* Global Styles for Consistency */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Consistent font across the site */
+            background-color: #f4f7f6; /* Light background color for the entire page */
+            color: #333; /* Dark text color for readability */
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            line-height: 1.6;
+        }
 
-<!-- Optionally show more details or additional configurations -->
-<p>Cost per page (Black & White): ${{ print_cost_config.black_white_print_cost }}</p>
-{% comment %} <form action="{% url 'payment_gateway' shop.id %}" method="post">
-    {% csrf_token %}
-    <button type="submit" class="btn btn-primary">Proceed to Order</button>
-</form> {% endcomment %}
+        h2 {
+            text-align: center;
+            color: #2980b9; /* Consistent blue theme for headings */
+            font-weight: bold;
+            margin-top: 30px;
+            font-size: 2rem;
+        }
 
-<!-- cost_estimation.html -->
-<form id="payment-form">
-    <button type="button" id="checkout-button" class="btn btn-primary">Proceed to Order</button>
-</form>
+        p {
+            text-align: center;
+            font-size: 1.2rem;
+            margin: 10px 0;
+        }
 
-<script src="https://js.stripe.com/v3/"></script>
-<script>
-    document.getElementById("checkout-button").addEventListener("click", function () {
-        fetch("{% url 'payment_gateway' shop.id %}", {
-            method: "POST",
-            headers: {
-                "X-CSRFToken": "{{ csrf_token }}"
+        .container {
+            width: 90%; /* Responsive width */
+            max-width: 600px; /* Max width for the content */
+            margin: 0 auto; /* Center the content */
+            background-color: #fff; /* White background for the container */
+            padding: 20px;
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for the container */
+            animation: slideIn 0.5s ease-in-out; /* Animation for the container */
+        }
+
+        button {
+            background-color: #ffdd57; /* Button color */
+            color: #000; /* Text color for the button */
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: block;
+            width: 100%; /* Full width button */
+            margin-top: 20px; /* Spacing between content and button */
+        }
+
+        button:hover {
+            background-color: #ffbb00; /* Darker button color on hover */
+        }
+
+        /* Keyframe Animations */
+        @keyframes slideIn {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
             }
-        })
-        .then(response => response.json())
-        .then(data => {
-            const stripe = Stripe(data.stripe_public_key);
-            return stripe.redirectToCheckout({sessionId: data.session_id});
-        })
-        .catch(error => console.error("Error:", error));
-    });
-</script>
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .container {
+                width: 90%;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Cost Estimation</h2>
+        <p>Print Shop: {{ shop.shop_name }}</p>
+        <p>Number of Pages: {{ page_count }}</p>
+        <p>Total Cost: ${{ total_cost }}</p>
+
+        <!-- Optionally show more details or additional configurations -->
+        <p>Cost per page (Black & White): ${{ print_cost_config.black_white_print_cost }}</p>
+
+        <!-- cost_estimation.html -->
+        <form id="payment-form">
+            <button type="button" id="checkout-button" class="btn btn-primary">Proceed to Order</button>
+        </form>
+    </div>
+
+    <script src="https://js.stripe.com/v3/"></script>
+    <script>
+        document.getElementById("checkout-button").addEventListener("click", function () {
+            fetch("{% url 'payment_gateway' shop.id %}", {
+                method: "POST",
+                headers: {
+                    "X-CSRFToken": "{{ csrf_token }}"
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                const stripe = Stripe(data.stripe_public_key);
+                return stripe.redirectToCheckout({sessionId: data.session_id});
+            })
+            .catch(error => console.error("Error:", error));
+        });
+    </script>
+</body>
+</html>
