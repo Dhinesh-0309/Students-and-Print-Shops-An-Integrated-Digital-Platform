@@ -9,7 +9,8 @@
     </style>
 </head>
 <body>
-    <h1>Files Uploaded for Your Shop</h1>
+    <h1>Welcome, {{ owner.shop_name }}!</h1>
+    <h2>Print Requests</h2>
     <ul>
         {% for request in print_requests %}
             <li>
@@ -21,5 +22,13 @@
             <li>No files uploaded yet.</li>
         {% endfor %}
     </ul>
+
+    
+<!-- Link to configure print cost -->
+<a href="{% url 'owner_settings' %}">Configure Print Cost</a>
+
+
+    
+
 </body>
 </html>

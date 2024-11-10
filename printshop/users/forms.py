@@ -2,6 +2,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from .models import OwnerProfile, PrintRequest
+from .models import PrintCostConfig
 
 class StudentRegistrationForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
@@ -61,3 +62,20 @@ class FileUploadForm(forms.ModelForm):
         elif page_choice == 'range' and start_page > end_page:
             raise forms.ValidationError("Start page must be less than or equal to end page.")
         return cleaned_data
+    
+    
+    
+class PrintCostForm(forms.ModelForm):
+    class Meta:
+        model = PrintCostConfig
+        fields = ['color_print_cost', 'black_white_print_cost']
+
+        # Optionally, you can add custom labels or help texts
+        labels = {
+            'color_print_cost': 'Cost per page (Color)',
+            'black_white_print_cost': 'Cost per page (Black & White)',
+        }
+        help_texts = {
+            'color_print_cost': 'Set the cost for color printing.',
+            'black_white_print_cost': 'Set the cost for black and white printing.',
+        }    

@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
-import os
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,6 +22,7 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',  # Works with pathlib
     }
 }
+import os
 
 # Media files settings
 MEDIA_URL = '/media/'
@@ -126,8 +127,11 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-
+DATA_UPLOAD_MAX_MEMORY_SIZE = 10485760
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
+# settings.py
+STRIPE_PUBLIC_KEY = 'pk_test_51POy3104Y1DOQSquH0CdcXwMTPFb3oUitFXORp3D8MRwulfupAFUb8o0wah78j4Waicb0SMJ40kvtwtM5tgQ1g9000kPMRnEAb'
+STRIPE_SECRET_KEY = 'sk_test_51POy3104Y1DOQSqu331CQf2FpjLUmnIdxm7bYgPfBWIa5nL3jX0p5zflOn0Lw46iZ65BmDS7otDn47JGCtf3nU1N00tv2amZ90'

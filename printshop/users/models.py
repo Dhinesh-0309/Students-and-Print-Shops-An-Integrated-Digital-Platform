@@ -14,7 +14,6 @@ class OwnerProfile(models.Model):
     def __str__(self):
         return self.shop_name
 
-
 class PrintRequest(models.Model):
     student = models.ForeignKey(User, on_delete=models.CASCADE)
     shop = models.ForeignKey(OwnerProfile, on_delete=models.CASCADE)
@@ -28,3 +27,13 @@ class PrintRequest(models.Model):
 
     def __str__(self):
         return f"Print Request by {self.student.username} for {self.shop.shop_name}"
+
+
+class PrintCostConfig(models.Model):
+    owner = models.OneToOneField(OwnerProfile, on_delete=models.CASCADE)
+    color_print_cost = models.DecimalField(max_digits=5, decimal_places=2, default=10.0)  # Default color cost
+    black_white_print_cost = models.DecimalField(max_digits=5, decimal_places=2, default=2.0)  # Default black & white cost
+
+    def __str__(self):
+        return f"Print Cost Config for {self.owner.shop_name}"    
+    

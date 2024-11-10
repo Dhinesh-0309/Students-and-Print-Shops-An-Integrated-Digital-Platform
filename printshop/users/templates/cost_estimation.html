@@ -1,0 +1,34 @@
+<h2>Cost Estimation</h2>
+<p>Print Shop: {{ shop.shop_name }}</p>
+<p>Number of Pages: {{ page_count }}</p>
+<p>Total Cost: ${{ total_cost }}</p>
+
+<!-- Optionally show more details or additional configurations -->
+<p>Cost per page (Black & White): ${{ print_cost_config.black_white_print_cost }}</p>
+{% comment %} <form action="{% url 'payment_gateway' shop.id %}" method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-primary">Proceed to Order</button>
+</form> {% endcomment %}
+
+<!-- cost_estimation.html -->
+<form id="payment-form">
+    <button type="button" id="checkout-button" class="btn btn-primary">Proceed to Order</button>
+</form>
+
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+    document.getElementById("checkout-button").addEventListener("click", function () {
+        fetch("{% url 'payment_gateway' shop.id %}", {
+            method: "POST",
+            headers: {
+                "X-CSRFToken": "{{ csrf_token }}"
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            const stripe = Stripe(data.stripe_public_key);
+            return stripe.redirectToCheckout({sessionId: data.session_id});
+        })
+        .catch(error => console.error("Error:", error));
+    });
+</script>
