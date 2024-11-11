@@ -46,7 +46,7 @@ class FileUploadForm(forms.ModelForm):
 
     class Meta:
         model = PrintRequest
-        exclude = ['pages']  # Exclude 'pages' field, we'll set it in the view
+        exclude = ['student', 'shop','pages']  # Exclude 'pages' field, we'll set it in the view
         widgets = {
             'print_config': forms.Select(choices=[('Color', 'Color'), ('Black & White', 'Black & White')])
         }

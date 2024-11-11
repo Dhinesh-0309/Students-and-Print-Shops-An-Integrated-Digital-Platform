@@ -41,6 +41,7 @@ def student_signup(request):
 
 
 
+
 def owner_signup(request):
     if request.method == 'POST':
         user_form = UserRegistrationForm(request.POST)
@@ -63,6 +64,8 @@ def owner_signup(request):
         'user_form': user_form,
         'owner_form': owner_form,
     })
+    
+    
 
 def user_login(request):
     if request.method == 'POST':
@@ -81,10 +84,14 @@ def user_login(request):
 
     return render(request, 'login.html')
 
+
+
 @login_required
 def student_dashboard(request):
     shops = OwnerProfile.objects.all()
     return render(request, 'student_dashboard.html', {'shops': shops})
+
+
 
 @login_required
 def owner_dashboard(request):
@@ -119,37 +126,43 @@ def owner_dashboard(request):
     
     return render(request, 'upload_file.html', {'form': form, 'shop': shop})
 
+
+
 @login_required
 def upload_file(request, shop_id):
     shop = get_object_or_404(OwnerProfile, id=shop_id)
     
     if request.method == 'POST':
         form = FileUploadForm(request.POST, request.FILES)
+        
         if form.is_valid():
             print_request = form.save(commit=False)
-            print_request.shop = shop
-            print_request.student = request.user
-            uploaded_file = request.FILES['file']
-            print_request.file = uploaded_file  # Set the file directly
-
+            # Set the required fields after form validation
+            print_request.student = request.user  # Set the student field
+            print_request.shop = shop             # Set the shop field
+            
             # Calculate page count if it's a PDF file
-            if uploaded_file.name.endswith('.pdf'):
+            uploaded_file = request.FILES.get('file_field')
+            if uploaded_file and uploaded_file.name.endswith('.pdf'):
                 pdf_reader = PdfReader(uploaded_file)
                 print_request.pages = len(pdf_reader.pages)
             else:
-                print_request.pages = 1  # Default for non-PDF or uncountable files
+                print_request.pages = 1  # Default for non-PDF files
 
-            print_request.save()  # Save the PrintRequest with the file
-
-            # Redirect to the cost estimation page
+            print_request.save()  # Save with all fields populated
+            
             return redirect('cost_estimation', shop_id=shop.id)
+        else:
+            print("Form is invalid")
+            print(form.errors)
+            
     else:
         form = FileUploadForm()
     
     return render(request, 'upload_file.html', {'form': form, 'shop': shop})
 
 
-    
+
 
 def cost_estimation(request, shop_id):
     shop = get_object_or_404(OwnerProfile, id=shop_id)
